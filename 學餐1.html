@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>元智大學學餐評分系統</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-liberty-market.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      ul.pagination li a {   
+          color: blueviolet;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+          transition: background-color .3s;
+          border: 1px solid #ddd;
+          font-size: 18px;
+      }
+
+      ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+      .attribute1 {
+        color:blueviolet;
+        font-size:30px;
+        font-family:Microsoft JhengHei;
+        font-weight:bold;
+      }
+      .attribute2 {
+        color:aliceblue;
+        font-size:20px;
+        font-weight:bold;
+      }
+      .attribute3 {
+        font-family:monospace;
+      }
+      .attribute4{
+        font-family:Microsoft JhengHei;
+      }
+    </style>
+  </head>
+
+<body>
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** 資料庫 ***** -->
+  <?php	
+	$host = 'localhost';
+	$dbuser = 'collegeres';
+	$dbpassword = 'collegeres';
+	$dbname = 'collegeres';
+
+	$link = mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+	if($link){
+		mysqli_query($link,"SET NAMES 'UTF8MB4'");
+		// echo "正確連接資料庫";
+	}
+	
+  ?>
+  
+  <!-- ***** 各家學餐 ***** -->
+  <div class="page-heading normal-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>YZU Restaurant</h6>
+          <h2>元智學餐資訊</h2>
+          <h6>All Restaurant</h6>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="explore.html" style="left:10px;">回選單</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="currently-market">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2><em>學餐</em>資訊欄</h2>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="filters">
+            <ul>
+              <li data-filter="*"  class="active">All Restaurant</li>
+              <li><a href="drink.html">Drink</a></li>
+              <li><a href="breakfast.html">Breakfast</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-12" style="margin:0px auto;">
+          <div class="row grid">
+		  
+            <div class="col-lg-6 currently-market-item all msc">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/自助餐.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">自助餐</p></h2>
+                  <h4><n>&nbsp;Buffet</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0932269334</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.<br></e>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='自助餐'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="自助餐.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all dig">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/仙桃.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">仙桃總鋪</p></h2>
+                  <h4><n>&nbsp;Xian-Tao</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0912640506</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.&nbsp;Sat.</e>
+                    <br>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='仙桃總鋪'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="仙桃菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all blc">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/陽光.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">陽光早午餐</p></h2>
+                  <h4><n>&nbsp;Yang-Guang</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0910143089</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.&nbsp;Sun.</e>
+                    <br>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='陽光早午餐'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="陽光菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all msc">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/冰窖.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">冰窖水果部</p></h2>
+                  <h4><n>&nbsp;Smiling Orange</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0927585295</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.<br></e>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='冰窖水果部'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="冰窖菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all vrt dig">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/SAHA.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">馺哈料理廚房</p></h2>
+                  <h4><n>&nbsp;SAHA Hala Kitchen</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0916006217</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.&nbsp;Sat.</e>
+                    <br>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='馺哈料理廚房'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="SAHA菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all msc blc">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/興仁.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">興仁食堂</p></h2>
+                  <h4><n>&nbsp;Xingren Food Store</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0922070310</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.&nbsp;Sun.</e>
+                    <br>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='興仁食堂'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="興仁菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all vrt dig">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/喜樂.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">喜樂早餐</p></h2>
+                  <h4><n>&nbsp;Xie-Le Breakfast</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0972116319</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.<br></e>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='喜樂早餐'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="喜樂菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all msc">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/自助餐.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">天河書屋</p></h2>
+                  <h4><n>&nbsp;Milkyway Bookstore</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0929373880</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.<br></e>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='天河書屋'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="天河菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all vrt dig">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/美而美.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">美而美</p></h2>
+                  <h4><n>&nbsp;Mei-Er-Mei</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0983250287</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Sun.<br></e>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='美而美'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="美而美菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+            <div class="col-lg-6 currently-market-item all vrt dig">
+              <div class="item">
+                <div class="col-xs-6 col-lg-6">
+                  <img src="assets/images/太發龍.jpg" alt="" style="border-radius: 20px; min-width: 80px;">
+                </div>
+                <div class="right-content">
+                  <h2><p class="attribute1">太發龍美食</p></h2>
+                  <h4><n>&nbsp;Taifalong meishi</n></h4>
+                  <div class="line-dec"></div>
+                  <span class="bid">
+                    <strong>Phone</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">0961167123</e><br><strong>Time</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<e class="attribute3">Mon.~Fri.&nbsp;Sun.</e>
+                    <br>
+					<script>
+						<?php
+							$sql = "SELECT sum(rating)/count(rating) as rate FROM `score` where choose='太發龍美食'";
+							$result = mysqli_query($link,$sql);
+							
+							if (mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)) { ?>
+									var rate = "<?php echo $row["rate"]; ?>";
+						<?php	}
+							} else { ?>
+								var rate = 0;
+						<?php	}?>
+						
+						if (parseInt(rate)>0){
+							for (var i=0; i<parseInt(rate); i++){
+								document.write('<span class="fa fa-star" style="font-size: 30px;"></span>');
+							}
+						}
+						else{
+							for (var i=0; i<5; i++){
+								document.write('<span class="fa fa-star-o" style="font-size: 30px;"></span>');
+							}
+						}
+					</script>
+                  </span>
+                  <div class="text-button">
+                    <a href="太菜單.html">菜單&評論</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="pagination">
+      <div class="outer" style="margin:0px auto;">
+        <div class="inner" >
+          <p><li><a href="#">❮</a><a href="學餐2.html">❯</a></li></p>
+        </div>
+      </div>
+    </ul>
+  </div>
+  <!-- ***** 各家學餐結束 ***** -->
+
+  <?php mysqli_close($link); ?>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+  </body>
+</html>

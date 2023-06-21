@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>元智大學學餐評分系統</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-liberty-market.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- 星星css -->
+    <style>
+      b{
+        color: rgb(255, 255, 255);
+      }
+      ul.pagination li a {   
+          color: blueviolet;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+          transition: background-color .3s;
+          border: 1px solid #ddd;
+          font-size: 18px;
+      }
+
+      ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+      .attribute1 {
+        color:blueviolet;
+        font-size:30px;
+        font-family:Microsoft JhengHei;
+        font-weight:bold;
+      }
+      .attribute2 {
+        color:aliceblue;
+        font-size:20px;
+        font-weight:bold;
+      }
+      .attribute3 {
+        font-family:monospace;
+      }
+      .attribute4{
+        font-family:Microsoft JhengHei;
+      }
+      
+      
+    </style>
+  </head>
+
+<body>
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+  
+  <div class="page-heading normal-space" >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12" >
+          <h6>YZU Restaurant</h6>
+          <h2>登入</h2>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="explore.html" style="left:10px; margin-top: -20px">回功能頁</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="item-details-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2><em>登入</em></h2>
+          </div>
+        </div>
+        <div class="col-lg-6" style="margin:0px auto;">
+          <form id="contact" action="signin.php" method="post" autocomplete="on" onsubmit="return check()">
+            <div class="row">
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="id">ID number</label>
+                  <input type="id" name="id" id="id" placeholder="1111401" pattern = "\d{7}" autocomplete="on" required>
+                </fieldset>
+              </div>
+			  <div class="col-lg-12">
+                <fieldset>
+                  <label for="id">Password</label>
+                  <input type="password" name="password" id="password" required>
+                </fieldset>
+              </div>
+			  <div class="col-lg-12 col-xs-12">
+                <fieldset>
+                  <p style="margin-left:20px; margin-bottom:-5px;"><a href="register.html">還沒註冊過嗎？點擊這裡註冊</a></p>
+                </fieldset>
+              </div>
+			  
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">送出</button>
+                </fieldset>
+              </div>
+			  
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="text/javascript">
+	function check(){
+		var idnum = document.getElementById("id").value;
+		var password = document.getElementById("password").value;
+		<?php
+			$host = 'localhost';
+			$dbuser = 'collegeres';
+			$dbpassword = 'collegeres';
+			$dbname = 'collegeres';
+			$link = mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+			mysqli_query($link,"SET NAMES 'UTF8MB4'");
+			
+			$sql = "SELECT `idnumber`, `password` FROM `member`";
+			$result = mysqli_query($link,$sql);
+			
+			if (mysqli_num_rows($result) > 0) {
+				while($row = mysqli_fetch_assoc($result)) { ?>
+					if (idnum == <?php echo $row["idnumber"]; ?>){
+						return true;
+					}
+		  <?php } 
+		    } ?> 
+			window.alert("此學號尚未註冊！");
+			return false;
+			
+	<?php	mysqli_close($link);?>
+	
+	}
+  </script>
+  
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+
+  <!-- <script src="assets/js/rating.js"></script> -->
+  
+
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+  
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>元智大學學餐評分系統</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-liberty-market.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <style>
+      p1{
+        position: absolute;
+        
+        left: 80px;
+      }
+      p2{
+        position: absolute;
+        
+        left: 230px;
+      }
+      p3{
+        position: absolute;
+        left: 380px;
+      }
+    </style>
+  </head>
+
+<body>
+	
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+	<?php
+	//session
+		// Sessions are always turned on
+		if(!isset($_SESSION)){
+			session_set_cookie_params(3600,'/');
+			session_start();
+		}
+		
+		if(isset($_SESSION['user_name'])){
+			header("Location: https://yzurestmarking.sytes.net/explore1.html");
+		}
+
+	?>
+
+  <div class="page-heading normal-space" >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12" >
+          <h6>YZU Restaurant</h6>
+          <h2>找學餐?想評分?讓我們幫你做!</h2>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="index.html" style="left:10px; margin-top: -20px">回首頁</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="discover-items">
+    <div class="container">
+      <div class="row">
+	  
+        <div class="col-xs-12 col-lg-6 ">
+          <div class="item" >
+            <div class="row">
+              <div class="col-lg-12" >
+                <span class="author">
+                  <img src="assets/images/find.jpg" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                </span>
+                <div class="container">
+                  <div class="box">
+                    <h4><span style="left: 50%;font-size: 100px;color: blueviolet;font-family: Microsoft JhengHei;">找餐廳</span></h4>
+                  </div>
+                  <div>
+                  <h4>不知道要吃什麼?來這裡看看吧!<br>&nbsp;</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="main-button">
+                  <a href="學餐1.html" style="margin-right: 30px">全部</a>
+                  <a href="drink.html">飲料</a>
+                  <a href="breakfast.html" style="margin-left: 30px">早餐</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		
+		<div class="col-xs-12 col-lg-6 ">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12" >
+                <span class="author">
+                  <img src="assets/images/signin.jpg" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                </span>
+                <div class="container">
+                  <div class="box">
+                    <h4><span style="left: 50%;font-size: 100px;color: blueviolet;font-family: Microsoft JhengHei;">登入</span></h4>
+                  </div>
+                  <div>
+                  <h4>要評論請先登入哦~<br>&nbsp;</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="main-button">
+                  <a href="signin.html">點我登入</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		
+		<div class="col-xs-12 col-lg-6 ">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-12" >
+                <span class="author">
+                  <img src="assets/images/mail.jpg" alt="" style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                </span>
+                <div class="container">
+                  <div class="box">
+                    <h4><span style="left: 50%;font-size: 100px;color: blueviolet;font-family: Microsoft JhengHei;">聯絡我們</span></h4>
+                  </div>
+                  <div>
+                  <h5>使用上遇到任何問題嗎？或是有什麼建議想提供給我們的嗎？<br>&nbsp;</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="main-button">
+                  <a href="contactus.html">告訴我們</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  </body>
+</html>
